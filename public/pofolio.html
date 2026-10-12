@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software Maintenance & AI Services</title>
+    <style>
+      /* --- Base & Reset --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: #f8fafc;
+        color: #334155;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* --- Navigation Bar --- */
+      .navbar {
+        background-color: #080c16; /* Adjusted slightly to blend with logo background */
+        color: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .logo img {
+        height: 50px; /* Adjust logo size */
+        border-radius: 4px;
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        gap: 20px;
+      }
+
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-link {
+        color: #e2e8f0;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 10px 12px;
+        display: block;
+        transition: color 0.3s;
+      }
+
+      .nav-link:hover {
+        color: #38bdf8;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #1e293b;
+        min-width: 280px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+      }
+
+      .dropdown-menu li a {
+        color: #cbd5e1;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-size: 14px;
+        border-bottom: 1px solid #334155;
+      }
+
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: #334155;
+        color: #38bdf8;
+      }
+
+      .nav-item:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .btn-quote {
+        background-color: #2563eb;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .btn-quote:hover {
+        background-color: #1d4ed8;
+      }
+
+      .mobile-toggle {
+        display: none;
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      /* --- Global Section Layout --- */
+      section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 32px;
+        color: #0f172a;
+        margin-bottom: 15px;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 40px;
+        font-size: 16px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+      }
+
+      .card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+      }
+
+      .card h3 {
+        color: #0f172a;
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+
+      /* --- Home Section with Background Image --- */
+      #home {
+        background:
+          linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85)),
+          url("images/lg1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        padding: 120px 0 100px;
+        text-align: center;
+      }
+
+      #home h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+      }
+
+      #home h1 span {
+        color: #38bdf8;
+      }
+
+      #home p {
+        font-size: 18px;
+        color: #cbd5e1;
+        max-width: 700px;
+        margin: 0 auto 30px;
+      }
+
+      /* --- About Section --- */
+      #about {
+        background-color: #ffffff;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        align-items: center;
+      }
+
+      /* --- Services Section --- */
+      #services {
+        background-color: #f8fafc;
+      }
+
+      .service-card {
+        transition: transform 0.3s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* --- Portfolio / Success Stories Section --- */
+      #portfolio {
+        background-color: #ffffff;
+      }
+
+      .portfolio-item {
+        background: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+      }
+
+      .portfolio-media {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background-color: #e2e8f0;
+      }
+
+      .portfolio-body {
+        padding: 20px;
+      }
+
+      .badge {
+        background: #e0f2fe;
+        color: #0369a1;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* --- Contact Section --- */
+      #contact {
+        background-color: #f8fafc;
+      }
+
+      .contact-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+      }
+
+      .contact-form button {
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      /* --- Footer --- */
+      footer {
+        background-color: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 30px 0;
+        border-top: 1px solid #1e293b;
+      }
+
+      /* Responsive Breakpoints */
+      @media (max-width: 900px) {
+        .mobile-toggle {
+          display: block;
+        }
+        .nav-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: #080c16;
+          flex-direction: column;
+          align-items: flex-start;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.4s ease;
+        }
+        .nav-menu.active {
+          max-height: 700px;
+        }
+        .nav-item {
+          width: 100%;
+        }
+        .dropdown-menu {
+          position: static;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          display: none;
+          background-color: #1e293b;
+        }
+        .nav-item.open .dropdown-menu {
+          display: block;
+        }
+        #home h1 {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV MENU -->
+    <header class="navbar">
+      <div class="nav-container">
+        <!-- Logo Image Added Here -->
+        <a href="#home" class="logo">
+          <img src="images/lg2.jpg" alt="SYNOVA Technologies Logo" />
+        </a>
+        <button class="mobile-toggle" id="mobileToggle">☰</button>
+
+        <nav>
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link">About Us</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a href="#services" class="nav-link">Services ▾</a>
+              <ul class="dropdown-menu">
+                <li><a href="#services">Legacy Software Maintenance</a></li>
+                <li><a href="#services">Custom Feature Development</a></li>
+                <li><a href="#services">AI Integration & Automation</a></li>
+                <li>
+                  <a href="#services">Database Migration (SQL to NoSQL)</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#portfolio" class="nav-link">Portfolio & Works</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contact" class="nav-link">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contact" class="btn-quote">Get a Quote</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT SECTIONS -->
+    <main>
+      <!-- 1. HOME SECTION -->
+      <section id="home">
+        <div class="container">
+          <h1>Modernize Your Legacy Systems & <span>Scale with AI</span></h1>
+          <p>
+            Software များကို အဆင့်မြှင့်တင်ခြင်း၊ AI နည်းပညာများ
+            ထည့်သွင်းခြင်းနှင့် လုပ်ငန်းသုံး အထူးဆော့ဖ်ဝဲ ဝန်ဆောင်မှုများကို
+            တစ်နေရာတည်းတွင် ရယူလိုက်ပါ။
+          </p>
+          <a
+            href="#contact"
+            class="btn-quote"
+            style="padding: 15px 30px; font-size: 16px"
+            >အခမဲ့ ဆွေးနွေးတိုင်ပင်ရန်</a
+          >
+        </div>
+      </section>
+
+      <!-- 2. ABOUT US SECTION -->
+      <section id="about">
+        <div class="container">
+          <h2 class="section-title">About Us</h2>
+          <p class="section-subtitle">ကျွန်ုပ်တို့၏ လုပ်ငန်းအကြောင်း မိတ်ဆက်</p>
+
+          <div class="about-content">
+            <div>
+              <h3>သင့်လုပ်ငန်းအတွက် စိတ်ချယုံကြည်ရသော Software Partner</h3>
+              <p>
+                ကျွန်ုပ်တို့သည် Legacy Software များကို Modernize
+                ပြုလုပ်ပေးခြင်း၊ အသစ် ရေးသားဖန်တီးပေးခြင်း၊ Database Migration
+                ပြုလုပ်ပေးခြင်းနှင့် AI Automation စနစ်များ
+                ချိတ်ဆက်ပေးခြင်းတို့တွင် အထူးကျွမ်းကျင်သော
+                နည်းပညာအဖွဲ့အစည်းဖြစ်ပါသည်။
+              </p>
+              <br />
+              <p>
+                လုပ်ငန်းသုံး Software များ Speed နှေးကွေးခြင်း၊ Error
+                တက်ခြင်းနှင့် Data များပြားလာ၍ တွက်ချက်မှု ကြန့်ကြာခြင်းများကို
+                ခေတ်မီ နည်းပညာများဖြင့် ထိရောက်စွာ ဖြေရှင်းပေးနေပါသည်။
+              </p>
+            </div>
+            <div class="card">
+              <h3>Why Choose Us?</h3>
+              <ul style="padding-left: 20px">
+                <li>ကျွမ်းကျင်ပညာရှင်များမှ တာဝန်ယူဆောင်ရွက်ခြင်း</li>
+                <li>Data မပျောက်ပျက်ဘဲ လုံခြုံစွာ ကူးပြောင်းပေးခြင်း</li>
+                <li>24/7 Technical & System Support</li>
+                <li>သင့်တင့်မျှတသော ဝန်ဆောင်ခ နှုန်းထားများ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SERVICES SECTION -->
+      <section id="services">
+        <div class="container">
+          <h2 class="section-title">Our Services</h2>
+          <p class="section-subtitle">
+            ကျွန်ုပ်တို့ ဆောင်ရွက်ပေးနေသော အဓိက ဝန်ဆောင်မှုများ
+          </p>
+
+          <div class="grid">
+            <div class="card service-card">
+              <h3>🛠️ Legacy System Maintenance</h3>
+              <p>
+                ဟောင်းနွမ်းနေသော Software Code များမှ Error များကို
+                ရှင်းလင်းပေးခြင်း၊ Speed မြှင့်တင်ပေးခြင်းနှင့် ခေတ်မီ UI/UX
+                သို့ အဆင့်မြှင့်တင်ပေးခြင်း။
+              </p>
+            </div>
+            <div class="card service-card">
+              <h3>💻 Custom Feature Development</h3>
+              <p>
+                လုပ်ငန်း လိုအပ်ချက်သစ်များနှင့်အညီ Software များထဲသို့ Feature
+                အသစ်များ ထပ်မံဖြည့်စွက် ရေးသားပေးခြင်း။
+              </p>
+            </div>
+            <div class="card service-card">
+              <h3>🤖 AI Integration & Automation</h3>
+              <p>
+                လက်ရှိ System များတွင် Smart AI Chatbot၊ Smart Search နှင့်
+                လုပ်ငန်းစဉ်များကို အလိုအလျောက် ဆောင်ရွက်ပေးမည့် Automation များ
+                ထည့်သွင်းပေးခြင်း။
+              </p>
+            </div>
+            <div class="card service-card">
+              <h3>🗄️ Database Migration (SQL to NoSQL)</h3>
+              <p>
+                Data အချက်အလက် မြောက်မြားစွာကို ပိုမိုမြန်ဆန်စွာ စီမံနိုင်ရန်
+                SQL Database များမှ NoSQL စနစ်သို့ တိကျလုံခြုံစွာ
+                ပြောင်းရွှေ့ပေးခြင်း။
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PORTFOLIO & PAST WORKS SECTION -->
+      <section id="portfolio">
+        <div class="container">
+          <h2 class="section-title">Portfolio & Past Works</h2>
+          <p class="section-subtitle">
+            ကျွန်ုပ်တို့ အောင်မြင်စွာ ဆောင်ရွက်ခဲ့ပြီးသော ပရောဂျက်များ၏
+            ဓာတ်ပုံနှင့် ဗီဒီယိုမှတ်တမ်းများ
+          </p>
+
+          <div class="grid">
+            <!-- Project 1 with Image ERP -->
+
+            <div class="portfolio-item">
+              <div
+                style="
+                  display: flex;
+                  overflow-x: auto;
+                  background-color: #e2e8f0;
+                  scroll-snap-type: x mandatory;
+                "
+              >
+                <img
+                  src="images/his.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/2.png"
+                  alt="Health Portal"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/3.png"
+                  alt="Catalog & Pricing"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/4.png"
+                  alt="Inventory & Stock"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/5.png"
+                  alt="Checkout POS"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/6.png"
+                  alt="Billing & Folio"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/7.png"
+                  alt="HR & Payroll"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/8.png"
+                  alt="Procurement"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    cursor: pointer;
+                  "
+                />
+              </div>
+              <div class="portfolio-body">
+                <span class="badge">Legacy Refactoring</span>
+                <h3 style="margin: 10px 0">Retail ERP Software Upgrade</h3>
+                <p style="font-size: 14px; color: #64748b">
+                  ၁၀ နှစ်ကျော် သုံးစွဲထားသော Desktop System ကို Error များ
+                  ရှင်းလင်းပေးပြီး Web-based Modern System အဖြစ်
+                  ပြောင်းလဲပေးခဲ့ပါသည်။
+                </p>
+              </div>
+            </div>
+
+            <!-- Project 2 with Video -->
+            <div class="portfolio-item">
+              <div
+                style="
+                  display: flex;
+                  overflow-x: auto;
+                  background-color: #e2e8f0;
+                  scroll-snap-type: x mandatory;
+                "
+              >
+                <img
+                  src="images/r1.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/l1.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/l2.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/ipd1.png"
+                  alt="Health Portal"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/ipd2.png"
+                  alt="Catalog & Pricing"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/ipd3.png"
+                  alt="Inventory & Stock"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/ipd4.png"
+                  alt="Checkout POS"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/ipd5.png"
+                  alt="Billing & Folio"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/n1.png"
+                  alt="HR & Payroll"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/n2.png"
+                  alt="Procurement"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    cursor: pointer;
+                  "
+                />
+              </div>
+              <div class="portfolio-body">
+                <span class="badge">Hospital Information System</span>
+                <h3 style="margin: 10px 0">
+                  LIS,RIS,Inpatient Management,OPD,BloodBank
+                </h3>
+                <p style="font-size: 14px; color: #64748b">
+                  ၁၀ နှစ်ကျော် သုံးစွဲထားသော Desktop System ကို Error များ
+                  ရှင်းလင်းပေးပြီး Microservices systems အဖြစ်
+                  ပြောင်းလဲပေးခဲ့ပါသည်။
+                </p>
+              </div>
+            </div>
+
+            <!-- Chatbot Services -->
+            <div class="portfolio-item">
+              <img
+                src="images/chatbot.jpg"
+                alt="Chatbot Integration Services"
+                class="portfolio-media"
+              />
+              <div class="portfolio-body">
+                <span class="badge">AI Automation & Agent Solutions</span>
+                <h3 style="margin: 10px 0">Facebook, Viber & Telegram Bots</h3>
+                <p style="font-size: 14px; color: #64748b">
+                  လုပ်ငန်းသုံး Facebook Page, Viber နှင့် Telegram တို့အတွက်
+                  Customer များအား 24/7 အလိုအလျောက် ပြန်လည်ဖြေကြားပေးမည့် Smart
+                  Chatbot များကို လိုအပ်ချက်နှင့်အညီ ချိတ်ဆက်ရေးသားပေးခြင်း။ n8n
+                  Automation နှင့် AI Integration များကိုလည်း
+                  ထည့်သွင်းပေးနိုင်ပါသည်။
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style="height: 30px"></div>
+
+          <div class="grid">
+            <!-- Project 1 with Image ERP -->
+
+            <div class="portfolio-item">
+              <div
+                style="
+                  display: flex;
+                  overflow-x: auto;
+                  background-color: #e2e8f0;
+                  scroll-snap-type: x mandatory;
+                "
+              >
+                <img
+                  src="images/h1.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/h1.png"
+                  alt="Health Portal"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+              </div>
+              <div class="portfolio-body">
+                <span class="badge">Legacy Refactoring</span>
+                <h3 style="margin: 10px 0">Hotel Management System</h3>
+                <p style="font-size: 14px; color: #64748b">
+                  ၁၀ နှစ်ကျော် သုံးစွဲထားသော Desktop System ကို Error များ
+                  ရှင်းလင်းပေးပြီး Cross Platform အဖြစ် ပြောင်းလဲပေးခဲ့ပါသည်။
+                </p>
+              </div>
+            </div>
+
+            <!-- Project 2 with Video -->
+            <div class="portfolio-item">
+              <div
+                style="
+                  display: flex;
+                  overflow-x: auto;
+                  background-color: #e2e8f0;
+                  scroll-snap-type: x mandatory;
+                "
+              >
+                <img
+                  src="images/hr1.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/hr2.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+                <img
+                  src="images/hr3.png"
+                  alt="HIS ERP Dashboard"
+                  onclick="openGalleryModal(this)"
+                  style="
+                    height: 200px;
+                    width: auto;
+                    object-fit: cover;
+                    scroll-snap-align: start;
+                    border-right: 2px solid #fff;
+                    cursor: pointer;
+                  "
+                />
+              </div>
+              <div class="portfolio-body">
+                <span class="badge">Human Resource Management System</span>
+                <h3 style="margin: 10px 0">HR</h3>
+                <p style="font-size: 14px; color: #64748b">
+                  ၁၀ နှစ်ကျော် သုံးစွဲထားသော Desktop System ကို Error များ
+                  ရှင်းလင်းပေးပြီး Microservices systems အဖြစ်
+                  ပြောင်းလဲပေးခဲ့ပါသည်။
+                </p>
+              </div>
+            </div>
+
+            <!-- Chatbot Services -->
+            <div class="portfolio-item">
+              <img
+                src="images/chatbot.jpg"
+                alt="Chatbot Integration Services"
+                class="portfolio-media"
+              />
+              <div class="portfolio-body">
+                <span class="badge">AI Automation & Agent Solutions</span>
+                <h3 style="margin: 10px 0">Facebook, Viber & Telegram Bots</h3>
+                <p style="font-size: 14px; color: #64748b">
+                  လုပ်ငန်းသုံး Facebook Page, Viber နှင့် Telegram တို့အတွက်
+                  Customer များအား 24/7 အလိုအလျောက် ပြန်လည်ဖြေကြားပေးမည့် Smart
+                  Chatbot များကို လိုအပ်ချက်နှင့်အညီ ချိတ်ဆက်ရေးသားပေးခြင်း။ n8n
+                  Automation နှင့် AI Integration များကိုလည်း
+                  ထည့်သွင်းပေးနိုင်ပါသည်။
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. CONTACT US SECTION -->
+      <section id="contact">
+        <div class="container">
+          <h2 class="section-title">Contact Us</h2>
+          <p class="section-subtitle">
+            သင့်လုပ်ငန်းအတွက် လိုအပ်သည်များကို ယခုပဲ ဆက်သွယ်မေးမြန်းပါ
+          </p>
+
+          <div class="contact-wrapper">
+            <div>
+              <h3>ဆက်သွယ်ရန် အချက်အလက်များ</h3>
+              <p style="margin: 15px 0">
+                သင့် Software များ အဆင့်မြှင့်တင်ရန် သို့မဟုတ် AI Integration
+                ပြုလုပ်ရန် အခမဲ့ ဆွေးနွေးတိုင်ပင်နိုင်ပါသည်။
+              </p>
+              <p>📍 <strong> Address:</strong> Yangon, Myanmar</p>
+              <p>📞 <strong> Phone:</strong> +95 9 447998469</p>
+              <p>📧 <strong> Email:</strong> linthu33@gmail.com</p>
+              <p>🌐 <strong> Socials:</strong> Facebook | Telegram | Viber</p>
+            </div>
+
+            <div class="card contact-form" id="chat-container">
+              <h3>🤖 AI Assistant</h3>
+              <div
+                id="chat-box"
+                style="
+                  height: 250px;
+                  overflow-y: auto;
+                  background: #f1f5f9;
+                  padding: 15px;
+                  border-radius: 6px;
+                  margin-bottom: 15px;
+                  border: 1px solid #cbd5e1;
+                  white-space: pre-line;
+                "
+              >
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 10px">
+                  မင်္ဂလာပါ! ကျွန်ုပ်သည် AI Assistant ဖြစ်ပြီး သင့်လုပ်ငန်းအတွက်
+                  Legacy Software Modernization, AI Integration နှင့် Custom
+                  Feature Development အကြောင်း မေးမြန်းနိုင်ပါသည်။
+                  ဉပမာ=(POS,HIS,LIS,RIS)
+                </p>
+              </div>
+
+              <div style="display: flex; gap: 10px">
+                <input
+                  type="text"
+                  id="user-input"
+                  placeholder="စာရိုက်ထည့်ပါ..."
+                  onkeydown="if (event.key === 'Enter') sendMessage();"
+                  style="margin-bottom: 0; flex: 1"
+                />
+                <button onclick="sendMessage()" style="padding: 12px 20px">
+                  ပို့မည်
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Image Modal  slide for Portfolio -->
+      <div
+        id="imageModal"
+        style="
+          display: none;
+          position: fixed;
+          z-index: 9999;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.85);
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <!-- Close Button -->
+        <span
+          onclick="closeModal()"
+          style="
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10000;
+          "
+          >&times;</span
+        >
+
+        <!-- Previous (Back) Button -->
+        <span
+          onclick="changeSlide(-1)"
+          style="
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10000;
+            padding: 15px;
+          "
+          >&#10094;</span
+        >
+
+        <!-- Main Modal Image -->
+        <img
+          id="modalImage"
+          style="
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+          "
+        />
+
+        <!-- Next Button -->
+        <span
+          onclick="changeSlide(1)"
+          style="
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10000;
+            padding: 15px;
+          "
+          >&#10095;</span
+        >
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 TechServices Company. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- JS for Mobile Toggle & Chatbot -->
+    <script>
+      const mobileToggle = document.getElementById("mobileToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      mobileToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      const dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", () => {
+          if (window.innerWidth <= 900) {
+            dropdown.classList.toggle("open");
+          }
+        });
+      });
+
+      async function sendMessage() {
+        const inputField = document.getElementById("user-input");
+        const message = inputField.value.trim();
+        if (!message) return;
+
+        const chatBox = document.getElementById("chat-box");
+
+        // User စာပို့သည်ကို ပြရန်
+        chatBox.innerHTML += `<p style="text-align: right; margin-bottom: 10px; color: #2563eb;"><strong>You:</strong> ${message}</p>`;
+        inputField.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+          // Backend ရှိ /api/chat သို့ လှမ်းခေါ်ခြင်း
+          const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: message, user: "Guest" }),
+          });
+          const data = await response.json();
+
+          // Bot မှ ပြန်စာကို ပြရန်
+          chatBox.innerHTML += `<p style="margin-bottom: 10px;"><strong>Bot:</strong> ${data.reply}</p>`;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (error) {
+          chatBox.innerHTML += `<p style="margin-bottom: 10px; color: red;"><strong>System:</strong> Server နှင့် ချိတ်ဆက်မှု အခက်အခဲရှိနေပါသည်။</p>`;
+        }
+      }
+
+      let currentGallery = [];
+      let currentIndex = 0;
+
+      // ပုံကို နှိပ်လိုက်လျှင် Gallery Modal ပေါ်လာစေရန်
+      function openGalleryModal(clickedImg) {
+        const container = clickedImg.parentElement;
+        const images = container.querySelectorAll("img");
+
+        currentGallery = []; // Array ကို အသစ်ပြန်သတ်မှတ်ရန်
+
+        // ကွန်တိန်နာထဲရှိ ပုံများကိုရှာဖွေပြီး Array ထဲထည့်ရန်
+        images.forEach((img, index) => {
+          currentGallery.push(img.src);
+          if (img === clickedImg) {
+            currentIndex = index; // လက်ရှိနှိပ်လိုက်သောပုံ၏ Index ကို မှတ်ထားရန်
+          }
+        });
+
+        updateModalImage();
+        document.getElementById("imageModal").style.display = "flex";
+      }
+
+      // Next / Back ပြောင်းရန် function
+      function changeSlide(step) {
+        currentIndex += step;
+
+        // နောက်ဆုံးပုံရောက်သွားလျှင် ပထမပုံသို့ ပြန်သွားရန် (Loop)
+        if (currentIndex >= currentGallery.length) {
+          currentIndex = 0;
+        }
+        // ပထမပုံမှ Back နှိပ်လျှင် နောက်ဆုံးပုံသို့ သွားရန်
+        else if (currentIndex < 0) {
+          currentIndex = currentGallery.length - 1;
+        }
+
+        updateModalImage();
+      }
+
+      // Modal ပေါ်ရှိပုံကို ပြောင်းလဲရန်
+      function updateModalImage() {
+        document.getElementById("modalImage").src =
+          currentGallery[currentIndex];
+      }
+
+      // Modal ပြန်ပိတ်ရန်
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+
+      // ပုံနှင့် ခလုတ်များမဟုတ်သော အပြင်ဘက်ကို နှိပ်လျှင် ပိတ်သွားစေရန်
+      window.addEventListener("click", function (event) {
+        const modal = document.getElementById("imageModal");
+        if (event.target == modal) {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>

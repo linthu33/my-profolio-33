@@ -1,0 +1,28 @@
+{
+  "name": "profolio",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1129.0",
+    "@langchain/core": "^1.2.10",
+    "@langchain/groq": "^1.3.1",
+    "@langchain/openai": "^1.5.12",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "langchain": "^1.5.11",
+    "mongoose": "^9.9.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260920.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.135.0"
+  }
+}

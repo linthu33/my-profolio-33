@@ -1,0 +1,58 @@
+name: Deploy Node.js App to VPS
+
+on:
+  push:
+    branches:
+      - main # main branch သို့ push လုပ်တိုင်း အလိုအလျောက် run မည်
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # GHCR သို့ Image တင်ရန် လိုအပ်သည်
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # GitHub မှ အလိုအလျောက် ပေးမည်
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # my-express-app နေရာတွင် သင့် Repo သို့မဟုတ် Project နာမည် အစားထိုးပါ (အသေးစာလုံးသာ)
+          tags: ghcr.io/${{ github.repository_owner }}/my-express-app:latest
+
+  deploy-to-vps:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into VPS and Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Private Repo ဖြစ်ပါက GHCR သို့ Login အရင်ဝင်ရန်
+            echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # VPS ပေါ်ရှိ သင့် Project Folder သို့ သွားရန် (လမ်းကြောင်း အမှန်ပြင်ပါ)
+            cd /var/www/my-express-app
+
+            # GHCR မှ နောက်ဆုံးထွက် Image ကို ဆွဲချမည်
+            docker compose pull
+
+            # Container ကို အသစ်ပြန် run မည်
+            docker compose up -d
+
+            # အသုံးမပြုတော့သော Image အဟောင်းများကို ရှင်းလင်းမည် (Storage မပြည့်စေရန်)
+            docker image prune -a -f
