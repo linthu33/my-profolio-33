@@ -45,14 +45,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            # Project folder ထဲသို့ ဝင်ပါ (သင့် VPS ပေါ်ရှိ လမ်းကြောင်းအတိုင်း ပြင်ပါ)
             cd /home/deploy/gitrepo
-
-            # နောက်ဆုံးရ image ကို ဆွဲယူပါ
-            docker-compose pull
-
-            # Container အဟောင်းများကို ရပ်ပြီး အသစ်ဖြင့် ပြန်လည် run ပါ
-            docker-compose up -d --remove-orphans
-
-            # အသုံးမပြုတော့သော image အဟောင်းများကို ရှင်းလင်းပါ
+            docker-compose -f docker-git-compose.yml pull
+            docker-compose -f docker-git-compose.yml up -d --remove-orphans
             docker image prune -af
